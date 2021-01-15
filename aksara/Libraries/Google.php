@@ -8,10 +8,6 @@
  * @since			version 4.0.0
  * @copyright		(c) 2021 - Aksara Laboratory
  */
-
-// Include the autoloader provided in the SDK
-//require_once ROOTPATH . 'vendor/autoload.php';
-
 class Google
 {
 	public function __construct()
@@ -51,11 +47,12 @@ class Google
 	 */
 	public function validate()
 	{
-		$user										= new Google_Oauth2Service($this->client);
+		$user										= new \Google_Service_Oauth2($this->client);
 		
 		if(service('request')->getGet('code') && !get_userdata('access_token'))
 		{
 			$this->client->authenticate(service('request')->getGet('code'));
+			
 			set_userdata('access_token', $this->client->getAccessToken());
 		}
 		

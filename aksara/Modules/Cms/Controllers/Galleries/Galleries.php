@@ -21,8 +21,6 @@ class Galleries extends \Aksara\Laboratory\Core
 		
 		$this->set_permission(array(1, 2));
 		$this->set_theme('backend');
-		
-		$this->crud();
 	}
 	
 	public function index()

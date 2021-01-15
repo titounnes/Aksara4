@@ -8,16 +8,11 @@
  * @since			version 4.0.0
  * @copyright		(c) 2021 - Aksara Laboratory
  */
-use Aksara\Libraries\Facebook;
-use Aksara\Libraries\Google;
-
 class Auth extends \Aksara\Laboratory\Core
 {
 	public function __construct()
 	{
 		parent::__construct();
-		
-		$this->crud();
 	}
 	
 	public function index()
@@ -148,7 +143,7 @@ class Auth extends \Aksara\Laboratory\Core
 		 */
 		if(get_setting('google_client_id') && get_setting('google_client_secret') && get_userdata('oauth_uid'))
 		{
-			$this->google							= new Google();
+			$this->google							= new \Aksara\Libraries\Google();
 			
 			$this->google->revokeToken();
 		}
@@ -164,7 +159,7 @@ class Auth extends \Aksara\Laboratory\Core
 	 */
 	public function google()
 	{
-		$this->google								= new Google();
+		$this->google								= new \Aksara\Libraries\Google();
 		
 		redirect_to($this->google->get_login_url());
 	}
@@ -174,7 +169,7 @@ class Auth extends \Aksara\Laboratory\Core
 	 */
 	public function google_auth()
 	{
-		$this->google								- new Google();
+		$this->google								= new \Aksara\Libraries\Google();
 		
 		$session									= $this->google->validate();
 		
@@ -186,7 +181,7 @@ class Auth extends \Aksara\Laboratory\Core
 	 */
 	public function facebook()
 	{
-		$this->facebook								= new Facebook();
+		$this->facebook								= new \Aksara\Libraries\Facebook();
 		
 		redirect_to($this->facebook->get_login_url());
 	}
@@ -196,7 +191,7 @@ class Auth extends \Aksara\Laboratory\Core
 	 */
 	public function facebook_auth()
 	{
-		$this->facebook								= new Facebook();
+		$this->facebook								= new \Aksara\Libraries\Facebook();
 		
 		$session									= $this->facebook->validate();
 		

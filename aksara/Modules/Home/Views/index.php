@@ -18,26 +18,59 @@
 			<h3 class="mb-3 text-center">
 				You are using <a href="//www.aksaracms.com" class="text-primary" target="blank"><b>Aksara</b></a>!
 			</h3>
-			<div class="mb-5">
-				<p>
-					You are viewing this page because you installing <a href="//www.aksaracms.com" class="text-primary" target="blank"><b>Aksara</b></a> as "<b>DEVELOPER MODE</b>". There's no example content that been created. Just like popular PHP framework, you must build your own modules by referencing the function served by <a href="//www.aksaracms.com" class="text-primary" target="blank"><b>Aksara</b></a>. You can still login and add your content to the built-in module (<b>CMS</b> a.k.a <b>Content Management System</b>) such <b>Blogs</b>, <b>Pages</b>, <b>Galleries</b> and many more.
-				</p>
-				<p>
-					This module is located in
-					<br />
-					<code><?php echo FCPATH; ?>aksara<?php echo DIRECTORY_SEPARATOR; ?>modules<?php echo DIRECTORY_SEPARATOR; ?>welcome</code>.
-				</p>
-				<p>
-					You can <b>override</b> this module into
-					<br />
-					<code><?php echo FCPATH; ?>modules<?php echo DIRECTORY_SEPARATOR; ?>welcome</code>
-					<br />
-					without removing the original one.
-				</p>
-				<p>
-					<b>How could that be done?</b> Because you are using <a href="//www.aksaracms.com" class="text-primary" target="blank"><b>Aksara</b></a>!
-				</p>
-			</div>
+			<?php
+				if($error && !file_exists(ROOTPATH . 'modules/Home/Controllers/Home.php'))
+				{
+					echo '
+						<div class="mb-5">
+							<p>
+								Unfortunatelly, your request to install the sample data cannot be processed due to folder permission issue.
+							</p>
+							' . (!$writable->uploads ? '<p class="mb-0 text-danger"><b>' . FCPATH . UPLOAD_PATH . '</b> is not writable.</p>' : null) . '
+							' . (!$writable->logs ? '<p class="mb-0 text-danger"><b>' . WRITEPATH . 'logs</b> is not writable.</p>' : null) . '
+							' . (!$writable->translations ? '<p class="mb-0 text-danger"><b>' . WRITEPATH . 'translations</b> is not writable.</p>' : null) . '
+							<br />
+							<p>
+								You could install the sample data manually by using this method:
+							</p>
+							<ol>
+								<li>
+									<a href="' . base_url('install/assets/sample-module.zip') . '" target="_blank" class="text-primary"><b>Click here</b></a> to download the sample module;
+								</li>
+								<li>
+									Extract to <code>' . ROOTPATH . 'modules</code> folder;
+								</li>
+								<li>
+									Reload this page.
+								</li>
+							</ol>
+						</div>
+					';
+				}
+				else
+				{
+					echo '
+						<div class="mb-5">
+							<p>
+								You are viewing this page because you installing <a href="//www.aksaracms.com" class="text-primary" target="blank"><b>Aksara</b></a> as "<b>DEVELOPER MODE</b>". There\'s no example content that been created. Just like popular PHP framework, you must build your own modules by referencing the function served by <a href="//www.aksaracms.com" class="text-primary" target="blank"><b>Aksara</b></a>. You can still login and add your content to the built-in module (<b>CMS</b> a.k.a <b>Content Management System</b>) such <b>Blogs</b>, <b>Pages</b>, <b>Galleries</b> and many more.
+							</p>
+							<p>
+								This module is located in
+								<br />
+								<code>' . FCPATH . 'aksara' . DIRECTORY_SEPARATOR . 'Modules' . DIRECTORY_SEPARATOR . 'Home</code>.
+							</p>
+							<p>
+								You can <b>override</b> this module into
+								<br />
+								<code>' . FCPATH . 'Modules' . DIRECTORY_SEPARATOR . 'Home</code> without removing the original one.
+							</p>
+							<p>
+								<b>How could that be done?</b> Because you are using <a href="//www.aksaracms.com" class="text-primary" target="blank"><b>Aksara</b></a>!
+							</p>
+						</div>
+					';
+				}
+			?>
 			<hr class="mt-5 mb-5" />
 			<h3 class="mb-3 text-center">
 				Go Further
@@ -64,8 +97,8 @@
 					You can open discussion related to the features, bugs or suggestions to the following community forum:
 				</p>
 				<p class="mb-1">
-					<a href="https://github.com/abydahana/aksara/issues" class="text-primary" target="blank">
-						https://github.com/abydahana/aksara/issues<i class="mdi mdi-open-in-new"></i>
+					<a href="https://github.com/abydahana/aksara4/issues" class="text-primary" target="blank">
+						https://github.com/abydahana/aksara4/issues<i class="mdi mdi-open-in-new"></i>
 					</a>
 				</p>
 				<p class="mb-1">

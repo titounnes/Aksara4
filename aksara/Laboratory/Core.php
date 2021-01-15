@@ -35,7 +35,6 @@ class Core extends Controller
 	protected $_api_request_parameter				= array();
 	
 	private $_language								= null;
-	private $_crud									= false;
 	private $_restrict_on_demo						= false;
 	private $_module								= null;
 	private $_submodule								= null;
@@ -241,7 +240,7 @@ class Core extends Controller
 			unset($query_string['aksara']);
 			
 			// validate token
-			if($this->_crud && $query_string && $token != generate_token($query_string))
+			if($this->_set_permission && $query_string && $token != generate_token($query_string))
 			{
 				// token is missmatch, throw an exception
 				return throw_exception(403, phrase('the_token_you_submitted_has_expired_or_you_are_trying_to_bypass_it_from_the_restricted_resource'), base_url());
@@ -2114,20 +2113,6 @@ class Core extends Controller
 	}
 	
 	/**
-	 * crud
-	 * Enable the crud functionality
-	 *
-	 * @access		public
-	 * @return		mixed
-	 */
-	public function crud()
-	{
-		$this->_crud								= true;
-		
-		return $this;
-	}
-	
-	/**
 	 * render
 	 * Rendering the result into view
 	 *
@@ -2644,7 +2629,7 @@ class Core extends Controller
 			elseif(method_exists($this, $this->_method))
 			{
 				$this->_set_icon					= ($this->_set_icon ? $this->_set_icon : 'mdi mdi-table');
-				$this->_set_title					= ($title ? $title : ($this->_crud || $this->_query ? phrase('title_was_not_set') : phrase('page_not_found')));
+				$this->_set_title					= ($title ? $title : ($this->_query ? phrase('title_was_not_set') : phrase('page_not_found')));
 				$this->_set_description				= ($description ? $description : null);
 				$this->_view						= (isset($this->_set_template['index']) ? $this->_set_template['index'] : ($view && 'index' != $view ? $view : 'index'));
 				$this->_results						= $this->render_table($this->_query);
@@ -2654,7 +2639,7 @@ class Core extends Controller
 			else
 			{
 				$this->_set_icon					= ($this->_set_icon ? $this->_set_icon : 'mdi mdi-table');
-				$this->_set_title					= ($title ? $title : ($this->_crud || $this->_query ? phrase('title_was_not_set') : phrase('page_not_found')));
+				$this->_set_title					= ($title ? $title : ($this->_query ? phrase('title_was_not_set') : phrase('page_not_found')));
 				$this->_set_description				= ($description ? $description : null);
 				$this->_view						= (isset($this->_set_template['index']) ? $this->_set_template['index'] : ($view && 'index' != $view ? $view : 'index'));
 				$this->_results						= $this->render_table($this->_query);
@@ -2676,7 +2661,7 @@ class Core extends Controller
 		(
 			'_token'								=> sha1(current_page() . ENCRYPTION_KEY . get_userdata('session_generated')),
 			'method'								=> $this->_method,
-			'breadcrumb'							=> $this->template->breadcrumb($this->_set_breadcrumb, $this->_set_title, $this->_query, $this->_crud),
+			'breadcrumb'							=> $this->template->breadcrumb($this->_set_breadcrumb, $this->_set_title, $this->_query),
 			'current_page'							=> current_page(null, service('request')->getGet()),
 			'meta'									=> array
 			(
@@ -2782,11 +2767,6 @@ class Core extends Controller
 			 */
 			if(service('request')->getPost('_token'))
 			{
-				if(!$this->_crud)
-				{
-					//return throw_exception(403, phrase('this_module_is_not_prepared_to_use_the_crud_feature'), (!$this->_api_request ? $this->_redirect_back : null));
-				}
-				
 				/**
 				 * Post token is initial to validate form. It's mean the request were
 				 * submitted through the form
@@ -4760,16 +4740,6 @@ class Core extends Controller
 	 */
 	public function render_table($data = array())
 	{
-		if(!$this->_crud)
-		{
-			$this->_unset_action					= array_merge($this->_unset_action, array('create', 'update', 'delete'));
-			
-			if('backend' != $this->_set_theme)
-			{
-				return $data;
-			}
-		}
-		
 		$serialized									= $this->serialize($data);
 		$output										= array();
 		$query_string								= array();

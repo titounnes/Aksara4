@@ -23,8 +23,6 @@ class Activities extends \Aksara\Laboratory\Core
 		$this->set_permission(1);
 		$this->set_theme('backend');
 		
-		$this->crud();
-		
 		if(service('request')->getGet('user_id'))
 		{
 			redirect(base_url('administrative/users/read?user_id=' . service('request')->getGet('user_id')));

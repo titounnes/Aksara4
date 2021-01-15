@@ -22,8 +22,6 @@ class Categories extends \Aksara\Laboratory\Core
 		$this->set_permission(array(1, 2));
 		$this->set_theme('backend');
 		
-		$this->crud();
-		
 		$this->set_upload_path('blogs');
 		$this->unset_delete('category_id', array(1));
 	}

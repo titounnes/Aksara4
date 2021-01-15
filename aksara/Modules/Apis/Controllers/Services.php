@@ -21,8 +21,6 @@ class Services extends \Aksara\Laboratory\Core
 		$this->set_permission(1);
 		$this->set_theme('backend');
 		
-		$this->crud();
-		
 		$this->_primary								= service('request')->getGet('id');
 	}
 	

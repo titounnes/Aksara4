@@ -42,7 +42,7 @@ class Dashboard extends \Aksara\Laboratory\Core
 			(
 				'writable'							=> array
 				(
-					'uploads'						=> (is_dir(UPLOAD_PATH) && is_writable(UPLOAD_PATH) ? true : false),
+					'uploads'						=> (is_dir(FCPATH . UPLOAD_PATH) && is_writable(FCPATH . UPLOAD_PATH) ? true : false),
 					'logs'							=> (is_dir(WRITEPATH . 'logs') && is_writable(WRITEPATH . 'logs') ? true : false),
 					'translations'					=> (is_dir(WRITEPATH . 'translations') && is_writable(WRITEPATH . 'translations') ? true : false)
 				),
