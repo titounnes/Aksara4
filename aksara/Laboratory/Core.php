@@ -4740,6 +4740,21 @@ class Core extends Controller
 	 */
 	public function render_table($data = array())
 	{
+		if(!$this->_set_permission)
+		{
+			$this->_unset_action					= array_merge($this->_unset_action, array('create', 'update', 'delete'));
+			
+			if(!$this->template)
+			{
+				$this->template						= new Template($this->_set_theme, $this->model, $this->_api_request);
+			}
+			
+			if('backend' != $this->template->get_theme_property('type'))
+			{
+				return $data;
+			}
+		}
+		
 		$serialized									= $this->serialize($data);
 		$output										= array();
 		$query_string								= array();
