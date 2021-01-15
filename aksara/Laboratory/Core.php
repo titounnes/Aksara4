@@ -258,10 +258,10 @@ class Core extends Controller
 		/**
 		 * Working with REST API
 		 */
-		if(service('request')->getHeader('X-API-KEY'))
+		if(service('request')->hasHeader('X-API-KEY'))
 		{
 			// handshake betwiin REST client and Aksara
-			$this->_handshake(service('request')->getHeader('X-API-KEY'));
+			$this->_handshake(service('request')->getHeaderLine('X-API-KEY'));
 		}
 		
 		// set upload path
@@ -8269,7 +8269,9 @@ class Core extends Controller
 	private function _handshake($api_key = 0)
 	{
 		/* destroy previous session to prevent hijacking */
-		$this->session->destroy();
+		service('session')->destroy();
+		
+		service('request')->setHeader('X-Requested-With', 'XMLHttpRequest');
 		
 		$client										= $this->model->select
 		('
@@ -8334,7 +8336,7 @@ class Core extends Controller
 		}
 		
 		/* set the temporary session */
-		$this->session->set
+		service('session')->set
 		(
 			array
 			(
@@ -8345,8 +8347,6 @@ class Core extends Controller
 		);
 		
 		$this->_set_language($client->language_id);
-		
-		$_SERVER['HTTP_X_REQUESTED_WITH']			= 'XMLHttpRequest';
 		
 		$this->_api_request							= true;
 		$this->_api_request_parameter				= json_decode($client->parameter, true);
