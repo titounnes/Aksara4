@@ -19,10 +19,10 @@
 define('TIMEZONE', '%TIMEZONE%');
 
 /**
- * Set the enviroment
+ * Set the environment
  * Available option: development, production
  */
-define('AKSARA_ENVIROMENT', 'development');
+define('CI_ENVIRONMENT', 'production');
 
 /**
  * Set the default site url
