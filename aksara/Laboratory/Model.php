@@ -2007,6 +2007,12 @@ class Model
 			}
 		}
 		
+		if($this->_group_by)
+		{
+			// run group by command
+			$builder->groupBy($this->_group_by);
+		}
+		
 		if($this->_limit)
 		{
 			// run limit command
