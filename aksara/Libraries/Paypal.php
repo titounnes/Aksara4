@@ -19,8 +19,8 @@ class Paypal
 		(
 			new \PayPal\Auth\OAuthTokenCredential
 			(
-				$params['client_id'],
-				$params['client_secret']
+				(isset($params['client_id']) ? $params['client_id'] : null),
+				(isset($params['client_secret']) ? $params['client_secret'] : null)
 			)
 		);
 	}
