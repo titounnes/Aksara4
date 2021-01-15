@@ -13,14 +13,14 @@
 
 class Paypal
 {
-	public function __construct()
+	public function __construct($params = array())
 	{
 		$this->_api_context							= new \PayPal\Rest\ApiContext
 		(
 			new \PayPal\Auth\OAuthTokenCredential
 			(
-				'AYSq3RDGsmBLJE-otTkBtM-jBRd1TCQwFf9RGfwddNXWz0uFU9ztymylOhRS', // ClientID
-				'EGnHDxD_qRPdaLdZz8iCr8N7_MzF-YHPTkjs6NKYQvQSBngp4PTTVWkPZRbL' // ClientSecret
+				$params['client_id'],
+				$params['client_secret']
 			)
 		);
 	}

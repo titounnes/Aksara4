@@ -1,4 +1,4 @@
-<?php namespace Aksara\Laboratories;
+<?php namespace Aksara\Libraries;
 /**
  * Extra database connector library
  * This class is used to generate new database connection
