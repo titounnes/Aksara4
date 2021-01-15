@@ -109,7 +109,7 @@ class Auth extends \Aksara\Laboratory\Core
 				if(1 == service('request')->getPost('remember_session'))
 				{
 					/* store session to the current device */
-					set_userdata('sessionExpiration', 0);
+					service('session')->sessionExpiration	= 0;
 				}
 				
 				/* set the user credential into session */
