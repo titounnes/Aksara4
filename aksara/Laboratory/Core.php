@@ -2296,7 +2296,7 @@ class Core extends Controller
 				}
 			}
 			
-			if($this->_set_primary)
+			if($this->_set_primary && $this->_set_permission)
 			{
 				$this->_crud						= true;
 			}
