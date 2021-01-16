@@ -424,6 +424,7 @@ class Template
 		foreach($data as $segment => $label)
 		{
 			$slug								.= $segment . '/';
+			
 			if($segment && $label)
 			{
 				if($segment != $current_slug)
