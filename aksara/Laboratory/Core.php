@@ -2699,7 +2699,7 @@ class Core extends Controller
 		/**
 		 * Format output from array into object
 		 */
-		$this->_output								= json_decode(json_encode($this->_output));
+		$this->_output								= json_decode(json_encode(json_fixer($this->_output)));
 		
 		/**
 		 * Generate output from the method
@@ -8094,7 +8094,7 @@ class Core extends Controller
 								}
 							}
 							
-							$prepare[$field]		= json_encode($items);
+							$prepare[$field]		= json_encode(json_fixer($items));
 						}
 						elseif(in_array('attributes', $type))
 						{
@@ -8113,7 +8113,7 @@ class Core extends Controller
 								}
 							}
 							
-							$prepare[$field]		= json_encode($items);
+							$prepare[$field]		= json_encode(json_fixer($items));
 						}
 						elseif(in_array('boolean', $type))
 						{

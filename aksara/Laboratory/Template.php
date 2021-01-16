@@ -318,6 +318,11 @@ class Template
 	
 	public function build($view = null, $data = array(), $breadcrumb = array(), $language = null)
 	{
+		if(!$data)
+		{
+			$data									= new \stdClass();
+		}
+		
 		$data->template								= (object) array
 		(
 			'pagination'							=> $this->pagination($data->pagination)
@@ -448,6 +453,11 @@ class Template
 	
 	public function pagination($data = array(), $return = true)
 	{
+		if(!$data)
+		{
+			$data									= new \stdClass();
+		}
+		
 		if(is_array($data))
 		{
 			$data									= (object) $data;
