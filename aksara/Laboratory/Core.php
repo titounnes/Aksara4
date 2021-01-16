@@ -129,6 +129,7 @@ class Core extends Controller
 	private $_compiled_having						= array();
 	private $_compiled_or_having					= array();
 	
+	private $_crud;
 	private $_distinct;
 	private $_select								= array();
 	private $_select_avg							= array();
@@ -2295,6 +2296,11 @@ class Core extends Controller
 				}
 			}
 			
+			if($this->_set_primary)
+			{
+				$this->_crud						= true;
+			}
+			
 			/* check if data is requested through autocomplete (jQuery plugin) */
 			if(service('request')->isAJAX() && 'autocomplete' == service('request')->getPost('method'))
 			{
@@ -2632,7 +2638,7 @@ class Core extends Controller
 				$this->_set_title					= ($title ? $title : ($this->_query ? phrase('title_was_not_set') : phrase('page_not_found')));
 				$this->_set_description				= ($description ? $description : null);
 				$this->_view						= (isset($this->_set_template['index']) ? $this->_set_template['index'] : ($view && 'index' != $view ? $view : 'index'));
-				$this->_results						= $this->render_table($this->_query);
+				$this->_results						= ($this->_crud ? $this->render_table($this->_query) : $this->_query);
 			}
 			
 			/* otherwise */
@@ -2642,7 +2648,7 @@ class Core extends Controller
 				$this->_set_title					= ($title ? $title : ($this->_query ? phrase('title_was_not_set') : phrase('page_not_found')));
 				$this->_set_description				= ($description ? $description : null);
 				$this->_view						= (isset($this->_set_template['index']) ? $this->_set_template['index'] : ($view && 'index' != $view ? $view : 'index'));
-				$this->_results						= $this->render_table($this->_query);
+				$this->_results						= ($this->_crud ? $this->render_table($this->_query) : $this->_query);
 			}
 		}
 		else
@@ -4740,7 +4746,7 @@ class Core extends Controller
 	 */
 	public function render_table($data = array())
 	{
-		if(!$this->_set_permission)
+		if(!$this->_crud)
 		{
 			$this->_unset_action					= array_merge($this->_unset_action, array('create', 'update', 'delete'));
 			
