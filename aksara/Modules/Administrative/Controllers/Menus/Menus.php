@@ -67,9 +67,9 @@ class Menus extends \Aksara\Laboratory\Core
 				'group_name'						=> phrase('group'),
 				'status'							=> phrase('status')
 			)
-		);
+		)
 		
-		return $this->render($this->_table);
+		->render($this->_table);
 	}
 	
 	private function _menus()

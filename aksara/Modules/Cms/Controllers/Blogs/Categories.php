@@ -76,8 +76,8 @@ class Categories extends \Aksara\Laboratory\Core
 				'language'							=> phrase('language'),
 				'language_id'						=> phrase('language')
 			)
-		);
+		)
 		
-		return $this->render($this->_table);
+		->render($this->_table);
 	}
 }

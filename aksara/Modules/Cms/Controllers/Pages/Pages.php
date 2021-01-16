@@ -133,8 +133,8 @@ class Pages extends \Aksara\Laboratory\Core
 				2									=> 'col-md-4'
 			)
 		)
-		->modal_size('modal-xl');
+		->modal_size('modal-xl')
 		
-		return $this->render($this->_table);
+		->render($this->_table);
 	}
 }

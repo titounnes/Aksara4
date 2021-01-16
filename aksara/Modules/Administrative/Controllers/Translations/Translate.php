@@ -54,9 +54,9 @@ class Translate extends \Aksara\Laboratory\Core
 				'id'								=> $this->_primary,
 				'code'								=> $this->_code
 			)
-		);
+		)
 		
-		return $this->render('app__languages');
+		->render('app__languages');
 	}
 	
 	public function delete_phrase()

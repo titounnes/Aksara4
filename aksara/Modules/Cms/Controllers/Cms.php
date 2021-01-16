@@ -24,8 +24,8 @@ class Cms extends \Aksara\Laboratory\Core
 	public function index()
 	{
 		$this->set_title(phrase('content_management_system'))
-		->set_icon('mdi mdi-briefcase-outline');
+		->set_icon('mdi mdi-briefcase-outline')
 		
-		return $this->render();
+		->render();
 	}
 }

@@ -83,9 +83,9 @@ class Privileges extends \Aksara\Laboratory\Core
 			)
 		)
 		->where('user_id', $this->_primary)
-		->limit(1);
+		->limit(1)
 		
-		return $this->render($this->_table);
+		->render($this->_table);
 	}
 	
 	/**

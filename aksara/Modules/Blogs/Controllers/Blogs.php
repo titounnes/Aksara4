@@ -32,9 +32,9 @@ class Blogs extends Core
 				/* get latest articles */
 				'articles'							=> $this->_get_articles()
 			)
-		);
+		)
 		
-		return $this->render();
+		->render();
 	}
 	
 	private function _get_spotlight()

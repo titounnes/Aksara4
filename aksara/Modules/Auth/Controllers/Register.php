@@ -112,9 +112,9 @@ class Register extends \Aksara\Laboratory\Core
 		$this->set_title(phrase('register_an_account'))
 		->set_icon('mdi mdi-account-plus')
 		->set_description(phrase('fill_all_the_required_field_below_to_take_a_new_account'))
-		->form_callback('_validate_form');
+		->form_callback('_validate_form')
 		
-		return $this->render();
+		->render();
 	}
 	
 	/**

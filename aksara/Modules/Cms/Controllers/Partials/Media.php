@@ -36,9 +36,9 @@ class Media extends \Aksara\Laboratory\Core
 			(
 				'results'							=> $this->_directory_list(service('request')->getGet('directory'))
 			)
-		);
+		)
 		
-		return $this->render();
+		->render();
 	}
 	
 	private function _directory_list($directory = null)

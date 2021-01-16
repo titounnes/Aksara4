@@ -207,8 +207,8 @@ class Settings extends \Aksara\Laboratory\Core
 				'id'								=> 1
 			)
 		)
-		->limit(1);
+		->limit(1)
 		
-		return $this->render($this->_table);
+		->render($this->_table);
 	}
 }

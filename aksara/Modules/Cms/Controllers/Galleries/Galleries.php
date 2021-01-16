@@ -106,8 +106,8 @@ class Galleries extends \Aksara\Laboratory\Core
 				'created_timestamp'					=> phrase('created'),
 				'updated_timestamp'					=> phrase('updated')
 			)
-		);
+		)
 		
-		return $this->render($this->_table);
+		->render($this->_table);
 	}
 }

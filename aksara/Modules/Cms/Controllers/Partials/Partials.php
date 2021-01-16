@@ -24,8 +24,8 @@ class Partials extends \Aksara\Laboratory\Core
 	public function index()
 	{
 		$this->set_title(phrase('partials'))
-		->set_icon('mdi mdi-briefcase-outline');
+		->set_icon('mdi mdi-briefcase-outline')
 		
-		return $this->render();
+		->render();
 	}
 }

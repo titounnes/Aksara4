@@ -37,9 +37,9 @@ class Auth extends \Aksara\Laboratory\Core
 		->set_icon('mdi mdi-lock-open-outline')
 		->set_description(phrase('use_your_account_information_to_start_session'))
 		
-		->form_callback('_validate_form');
+		->form_callback('_validate_form')
 		
-		return $this->render();
+		->render();
 	}
 	
 	/**

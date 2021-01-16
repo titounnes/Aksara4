@@ -83,8 +83,8 @@ class Peoples extends \Aksara\Laboratory\Core
 				'biography'							=> phrase('biography'),
 				'status'							=> phrase('status')
 			)
-		);
+		)
 		
-		return $this->render($this->_table);
+		->render($this->_table);
 	}
 }

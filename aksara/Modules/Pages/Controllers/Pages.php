@@ -72,9 +72,9 @@ class Pages extends \Aksara\Laboratory\Core
 				'status'							=> 1
 			)
 		)
-		->limit(1);
+		->limit(1)
 		
-		return $this->render($this->_table);
+		->render($this->_table);
 	}
 	
 	public function not_found()

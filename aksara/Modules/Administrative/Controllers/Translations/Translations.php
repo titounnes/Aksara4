@@ -69,9 +69,9 @@ class Translations extends \Aksara\Laboratory\Core
 				'locale'							=> phrase('locale'),
 				'status'							=> phrase('status')
 			)
-		);
+		)
 		
-		return $this->render($this->_table);
+		->render($this->_table);
 	}
 	
 	public function after_insert()

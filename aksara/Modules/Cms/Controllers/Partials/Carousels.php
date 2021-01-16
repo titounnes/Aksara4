@@ -75,8 +75,8 @@ class Carousels extends \Aksara\Laboratory\Core
 				'language_id'						=> phrase('language'),
 				'status'							=> phrase('status')
 			)
-		);
+		)
 		
-		return $this->render($this->_table);
+		->render($this->_table);
 	}
 }

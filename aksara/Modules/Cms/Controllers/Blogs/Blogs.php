@@ -178,8 +178,8 @@ class Blogs extends \Aksara\Laboratory\Core
 			(
 				'author'							=> get_userdata('user_id')
 			)
-		);
+		)
 		
-		return $this->render($this->_table);
+		->render($this->_table);
 	}
 }
