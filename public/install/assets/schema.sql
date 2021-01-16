@@ -145,7 +145,8 @@ CREATE TABLE `app__languages` (
 --
 
 INSERT INTO `app__languages` (`id`, `language`, `description`, `code`, `locale`, `status`) VALUES
-(1, 'Default (English)', 'Default language', 'en', 'en-US,en_US,en_US.UTF8,en-us,en,english', 1);
+(1, 'Default (English)', 'Default language', 'en', 'en-US,en_US,en_US.UTF8,en-us,en,english', 1),
+(2, 'Bahasa Indonesia', 'Terjemahan bahasa Indonesia', 'id', 'id-ID,id_ID,id_ID.UTF8,id-id,id,indonesian', 1);
 
 -- --------------------------------------------------------
 
@@ -748,7 +749,7 @@ ALTER TABLE `app__groups`
 -- AUTO_INCREMENT for table `app__languages`
 --
 ALTER TABLE `app__languages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `app__menus`
