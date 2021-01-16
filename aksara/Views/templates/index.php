@@ -79,13 +79,16 @@ if(isset($results->extra_action->toolbar))
 					<select name="column" class="form-control">
 						<option value="all"><?php echo phrase('all_columns'); ?></option>
 						<?php
-							foreach($results->columns as $key => $val)
+							if(isset($results->columns))
 							{
-								echo '
-									<option value="' . $val->field . '"' . ($val->field == service('request')->getGet('column') ? ' selected' : null) . '>
-										' . $val->label . '
-									</option>
-								';
+								foreach($results->columns as $key => $val)
+								{
+									echo '
+										<option value="' . $val->field . '"' . ($val->field == service('request')->getGet('column') ? ' selected' : null) . '>
+											' . $val->label . '
+										</option>
+									';
+								}
 							}
 						?>
 					</select>
