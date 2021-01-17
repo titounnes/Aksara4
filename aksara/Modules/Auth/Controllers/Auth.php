@@ -325,7 +325,7 @@ class Auth extends \Aksara\Laboratory\Core
 					'group_id'						=> $default_membership,
 					'registered_date'				=> date('Y-m-d'),
 					'last_login'					=> date('Y-m-d H:i:s'),
-					'status'						=> (get_setting('auto_active_registration') ? 1 : 0)
+					'status'						=> 1
 				)
 			);
 			
