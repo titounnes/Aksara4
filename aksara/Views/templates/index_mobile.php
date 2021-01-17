@@ -265,7 +265,7 @@
 		/**
 		 * Pagination
 		 */
-		echo ($pagination->total_rows > 0 ? '<div class="pt-3">' . $this->template->pagination($pagination) . '</div>' : null);
+		echo ($pagination->total_rows > 0 ? '<div class="pt-3">' . $template->pagination . '</div>' : null);
 	?>
 	<div class="opt-btn-overlap-fix"></div><!-- fix the overlap -->
 	<!-- bottom toolbar -->

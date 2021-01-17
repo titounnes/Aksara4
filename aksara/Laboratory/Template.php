@@ -377,7 +377,14 @@ class Template
 			// no matches view, use template instead
 			if(service('router')->getMatchedRoute())
 			{
-				$this->_view						= 'templates/' . $view;
+				if(file_exists(APPPATH . 'Views/templates/' . $view . $suffix . '.php'))
+				{
+					$this->_view					= 'templates/' . $view . $suffix;
+				}
+				else
+				{
+					$this->_view					= 'templates/' . $view;
+				}
 			}
 			else
 			{
