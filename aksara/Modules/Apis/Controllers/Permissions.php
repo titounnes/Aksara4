@@ -185,18 +185,38 @@ class Permissions extends \Aksara\Laboratory\Core
 		->join
 		(
 			'rest__services',
-			'rest__services.id = rest__permissions.service_id'
+			'rest__services.id = rest__permissions.service_id',
+			'left'
 		)
 		->get_where
 		(
 			'rest__permissions',
 			array
 			(
-				'rest__permissions.id'				=> service('request')->getPost('primary')
+				'rest__services.id'					=> service('request')->getPost('primary'),
+				'rest__permissions.id'				=> service('request')->getGet('id')
 			),
 			1
 		)
 		->row();
+		
+		if(!$query)
+		{
+			$query									= $this->model->select
+			('
+				rest__services.url
+			')
+			->get_where
+			(
+				'rest__services',
+				array
+				(
+					'rest__services.id'				=> service('request')->getPost('primary')
+				),
+				1
+			)
+			->row();
+		}
 		
 		if($query)
 		{

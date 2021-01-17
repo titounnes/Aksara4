@@ -86,13 +86,13 @@ class Template
 		$suffix										= (service('request')->getUserAgent()->isMobile() ? '_mobile' : ('modal' == service('request')->getPost('prefer') ? '_modal' : null));
 		
 		// generate theme view
-		$theme_view									= '../themes/' . $this->theme . '/Views/' . preg_replace('/\/Views\//', '/', $base_view, 1) . '.php';
+		$theme_view									= '../themes/' . $this->theme . '/Views/' . preg_replace('/\/Views\//', '/', $base_view . $suffix, 1) . '.php';
 		
 		// generate module view
-		$module_view								= '../modules/' . $base_view . '.php';
+		$module_view								= '../modules/' . $base_view . $suffix . '.php';
 		
 		// generate core view
-		$core_view									= '../aksara/Modules/' . $base_view . '.php';
+		$core_view									= '../aksara/Modules/' . $base_view . $suffix . '.php';
 		
 		/**
 		 * -----------------------------------------------------------

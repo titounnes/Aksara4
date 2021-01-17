@@ -52,7 +52,6 @@ class Core extends Controller
 	private $_upload_data							= array();
 	private $_upload_error							= array();
 	private $_set_method							= null;
-	private $_slug									= null;
 	private $_set_permission						= false;
 	
 	private $_set_breadcrumb						= array();
@@ -2208,7 +2207,7 @@ class Core extends Controller
 						}
 						elseif(in_array($val, $this->_set_primary) && $this->model->field_exists($val, $this->_from) && isset($this->_set_default[$val]) && $this->_set_default[$val])
 						{
-							if(('read' == $this->_method && isset($this->_unset_read[$val]) && in_array(service('request')->getGet($val), $this->_unset_read[$val])) || ('update' == $this->_method && isset($this->_unset_update[$val]) && in_array(service('request')->getGet($val), $this->_unset_update[$val])) || ('delete' == $this->_method && isset($this->_unset_delete[$val]) && in_array(service('request')->getGet($val), $this->_unset_delete[$val])) || ('export' == $this->_method && isset($this->_unset_read[$val]) && in_array(service('request')->getGet($val), $this->_unset_read[$val])) || ('print' == $this->_method && isset($this->_unset_read[$val]) && in_array(service('request')->getGet($val), $this->_unset_read[$val])) || ('pdf' == $this->_method && isset($this->_unset_read[$val]) && in_array(service('request')->getGet($val), $this->_unset_read[$val]))/* || !$this->_api_request*/)
+							if(('read' == $this->_method && isset($this->_unset_read[$val]) && in_array(service('request')->getGet($val), $this->_unset_read[$val])) || ('update' == $this->_method && isset($this->_unset_update[$val]) && in_array(service('request')->getGet($val), $this->_unset_update[$val])) || ('delete' == $this->_method && isset($this->_unset_delete[$val]) && in_array(service('request')->getGet($val), $this->_unset_delete[$val])) || ('export' == $this->_method && isset($this->_unset_read[$val]) && in_array(service('request')->getGet($val), $this->_unset_read[$val])) || ('print' == $this->_method && isset($this->_unset_read[$val]) && in_array(service('request')->getGet($val), $this->_unset_read[$val])) || ('pdf' == $this->_method && isset($this->_unset_read[$val]) && in_array(service('request')->getGet($val), $this->_unset_read[$val])) || !$this->_api_request)
 							{
 								if(in_array($this->_method, array('read', 'export', 'print', 'pdf')))
 								{
@@ -7804,7 +7803,7 @@ class Core extends Controller
 		/* serialize the fields */
 		$serialized									= $this->serialize($data);
 		
-		if(is_array($serialized) && sizeof($serialized) > 0)
+		if(service('request')->getPost() && is_array($serialized) && sizeof($serialized) > 0)
 		{
 			$validation								= false;
 			
@@ -7827,7 +7826,7 @@ class Core extends Controller
 				{
 					$validation						= true;
 					
-					$this->form_validation->setRule($key . '[]', (isset($this->_set_alias[$key]) ? $this->_set_alias[$key] : ucwords(str_replace('_', ' ', $key))), 'validate_upload[' . $key . '.image]');
+					$this->form_validation->setRule($key . '.*', (isset($this->_set_alias[$key]) ? $this->_set_alias[$key] : ucwords(str_replace('_', ' ', $key))), 'validate_upload[' . $key . '.image]');
 				}
 				elseif(in_array('file', $type))
 				{
@@ -7839,21 +7838,21 @@ class Core extends Controller
 				{
 					$validation						= true;
 					
-					$this->form_validation->setRule($key . '[]', (isset($this->_set_alias[$key]) ? $this->_set_alias[$key] : ucwords(str_replace('_', ' ', $key))), 'validate_upload[' . $key . ']');
+					$this->form_validation->setRule($key . '.*', (isset($this->_set_alias[$key]) ? $this->_set_alias[$key] : ucwords(str_replace('_', ' ', $key))), 'validate_upload[' . $key . ']');
 				}
 				elseif(in_array('carousels', $type))
 				{
 					$validation						= true;
 					
-					$this->form_validation->setRule($key . '[background][]', (isset($this->_set_alias[$key]) ? $this->_set_alias[$key] : ucwords(str_replace('_', ' ', $key))), 'validate_upload[' . $key . '.image]');
-					$this->form_validation->setRule($key . '[thumbnail][]', (isset($this->_set_alias[$key]) ? $this->_set_alias[$key] : ucwords(str_replace('_', ' ', $key))), 'validate_upload[' . $key . '.image]');
+					$this->form_validation->setRule($key . '.background.*', (isset($this->_set_alias[$key]) ? $this->_set_alias[$key] : ucwords(str_replace('_', ' ', $key))), 'validate_upload[' . $key . '.image]');
+					$this->form_validation->setRule($key . '.thumbnail.*', (isset($this->_set_alias[$key]) ? $this->_set_alias[$key] : ucwords(str_replace('_', ' ', $key))), 'validate_upload[' . $key . '.image]');
 				}
 				elseif(in_array('faqs', $type))
 				{
 					$validation						= true;
 					
-					$this->form_validation->setRule($key . '[question][]', phrase('question') . ' ' . (isset($this->_set_alias[$key]) ? $this->_set_alias[$key] : ucwords(str_replace('_', ' ', $key))), 'trim|required');
-					$this->form_validation->setRule($key . '[answer][]', phrase('answer') . ' ' . (isset($this->_set_alias[$key]) ? $this->_set_alias[$key] : ucwords(str_replace('_', ' ', $key))), 'trim|required');
+					$this->form_validation->setRule($key . '.question.*', phrase('question') . ' ' . (isset($this->_set_alias[$key]) ? $this->_set_alias[$key] : ucwords(str_replace('_', ' ', $key))), 'trim|required');
+					$this->form_validation->setRule($key . '.answer.*', phrase('answer') . ' ' . (isset($this->_set_alias[$key]) ? $this->_set_alias[$key] : ucwords(str_replace('_', ' ', $key))), 'trim|required');
 				}
 				elseif(in_array('password', $type))
 				{
@@ -7906,7 +7905,7 @@ class Core extends Controller
 						
 						if(is_array(service('request')->getPost($key)))
 						{
-							$this->form_validation->setRule($key . '[]', (isset($this->_set_alias[$key]) ? $this->_set_alias[$key] : ucwords(str_replace('_', ' ', $key))), 'trim|' . $val['validation']);
+							$this->form_validation->setRule($key . '.*', (isset($this->_set_alias[$key]) ? $this->_set_alias[$key] : ucwords(str_replace('_', ' ', $key))), 'trim|' . $val['validation']);
 						}
 						else
 						{
@@ -7933,7 +7932,7 @@ class Core extends Controller
 				foreach($serialized[0] as $field => $value)
 				{
 					/* check if field is manageable through API */
-					if($this->_api_request_parameter && !in_array($key, $this->_api_request_parameter)) continue;
+					if($this->_api_request_parameter && !in_array($field, $this->_api_request_parameter)) continue;
 					
 					$type							= $value['type'];
 					
@@ -8217,7 +8216,7 @@ class Core extends Controller
 		}
 		else
 		{
-			return throw_exception(404, phrase('no_data_can_be_executed'), $this->_redirect_back);
+			return throw_exception(404, phrase('no_data_can_be_executed'), (!$this->_api_request ? $this->_redirect_back : null));
 		}
 	}
 	
@@ -8275,7 +8274,10 @@ class Core extends Controller
 	private function _handshake($api_key = 0)
 	{
 		/* destroy previous session to prevent hijacking */
-		service('session')->destroy();
+		if(session_status() == PHP_SESSION_ACTIVE)
+		{
+			session_destroy();
+		}
 		
 		service('request')->setHeader('X-Requested-With', 'XMLHttpRequest');
 		
@@ -8314,7 +8316,7 @@ class Core extends Controller
 				'rest__permissions.status'			=> 1,
 				'rest__clients.api_key'				=> $api_key,
 				'rest__clients.valid_until >= '		=> date('Y-m-d'),
-				'rest__services.url'				=> $this->_slug
+				'rest__services.url'				=> rtrim(uri_string(), '/' . $this->_method)
 			),
 			1
 		)

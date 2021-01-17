@@ -32,7 +32,6 @@ class Clients extends \Aksara\Laboratory\Core
 		->unset_field('id')
 		->unset_view('id')
 		->column_order('first_name')
-		->add_action('option', '../permissions', phrase('permission'), 'btn-dark', 'mdi mdi-security-network', array('client' => 'user_id'))
 		->set_field
 		(
 			array
@@ -56,6 +55,7 @@ class Clients extends \Aksara\Laboratory\Core
 			)
 		)
 		->set_field('first_name', 'hyperlink', 'apis/permissions', array('client' => 'user_id'))
+		->add_action('option', '../permissions', phrase('permission'), 'btn-dark --xhr', 'mdi mdi-security-network', array('client' => 'user_id'))
 		->set_relation
 		(
 			'user_id',
